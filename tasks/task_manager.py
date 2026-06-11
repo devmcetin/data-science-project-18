@@ -3,13 +3,14 @@ from typing import List
 import numpy as np
 from scipy.stats import binom, poisson
 
+
 # Açıklama:
 # Bir Witcher'ın karşılaştığı canavarı öldürme şansı probability ile verilir.
 # Bu olay bir Bernoulli deneyidir. Fonksiyon True (öldürdü) ya da False (ölmedi) döndürmelidir.
 # Input: probability=0.7
 # Output: True veya False
 def is_monster_killed(probability: float) -> bool:
-    pass
+    return bool(np.random.binomial(1, probability))
 
 
 # Açıklama:
@@ -18,7 +19,7 @@ def is_monster_killed(probability: float) -> bool:
 # Input: n=100, p=0.65
 # Output: 68 (örnek)
 def simulate_monster_hunts(n: int, p: float) -> int:
-    pass
+    return np.random.binomial(n, p)
 
 
 # Açıklama:
@@ -27,7 +28,7 @@ def simulate_monster_hunts(n: int, p: float) -> int:
 # Input: lmbda=2.5, time=4
 # Output: 10 (örnek)
 def expected_poison_attacks(lmbda: float, time: int) -> int:
-    pass
+    return np.random.poisson(lmbda * time)
 
 
 # Açıklama:
@@ -35,7 +36,7 @@ def expected_poison_attacks(lmbda: float, time: int) -> int:
 # Input: k=7, n=10, p=0.6
 # Output: 0.215 (örnek)
 def probability_k_monsters_killed(k: int, n: int, p: float) -> float:
-    pass
+    return binom.pmf(k, n, p)
 
 
 # Açıklama:
@@ -44,7 +45,7 @@ def probability_k_monsters_killed(k: int, n: int, p: float) -> float:
 # Input: k=3, lmbda=2.5
 # Output: 0.213 (örnek)
 def poisson_probability(k: int, lmbda: float) -> float:
-    pass
+    return poisson.pmf(k, lmbda)
 
 
 # Açıklama:
@@ -52,7 +53,7 @@ def poisson_probability(k: int, lmbda: float) -> float:
 # Input: trials=1000, p=0.5
 # Output: 0.501 (örnek)
 def average_kill_rate(trials: int, p: float) -> float:
-    pass
+    return float(np.random.binomial(trials, p)) / 1000
 
 
 # Açıklama:
@@ -60,7 +61,10 @@ def average_kill_rate(trials: int, p: float) -> float:
 # Input: p1=0.6, p2=0.7, trials=1000
 # Output: 'Witcher 2'
 def compare_two_witchers(p1: float, p2: float, trials: int) -> str:
-    pass
+    witcher1 = np.random.binomial(trials, p1)
+    witcher2 = np.random.binomial(trials, p2)
+
+    return "Witcher 1" if witcher1 > witcher2 else "Witcher 2"
 
 
 # Açıklama:
@@ -68,4 +72,4 @@ def compare_two_witchers(p1: float, p2: float, trials: int) -> str:
 # Input: hours=24, lmbda=3.0
 # Output: [2, 3, 1, 5, ...]
 def simulate_poison_attacks_day(hours: int, lmbda: float) -> List[int]:
-    pass
+    return np.random.poisson(lmbda, hours).tolist()
